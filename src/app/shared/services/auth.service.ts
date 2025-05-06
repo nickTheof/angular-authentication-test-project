@@ -15,6 +15,7 @@ export class AuthService {
 
   private _token = signal<string | null>(localStorage.getItem('token'));
   private _user = signal<CurrentUser | null>(null);
+  private _lastFetched = signal<number | null>(null);
 
   token = this._token.asReadonly();
   user = this._user.asReadonly();
@@ -54,7 +55,16 @@ export class AuthService {
           Authorization: `Bearer ${this._token()}`,
         },
       })
-      .pipe(tap((resp) => this._user.set(resp.data)));
+      .pipe(
+        tap((resp) => {
+          this._user.set(resp.data);
+          this._lastFetched.set(Date.now());
+        })
+      );
+  }
+
+  getLastFetched(): number | null {
+    return this._lastFetched();
   }
 }
 
@@ -70,7 +80,14 @@ export const isAuthenticatedGuard: CanMatchFn = () => {
     return of(false);
   }
 
-  if (authService.user()) {
+  const lastFetched = authService.getLastFetched();
+
+  // Only proceed if lastFetched is not null and within the 1-hour window
+  if (
+    authService.user() &&
+    lastFetched &&
+    Date.now() - lastFetched < 3_600_000 // 1 hour
+  ) {
     return of(true);
   }
 

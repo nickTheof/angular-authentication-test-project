@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { DashboardComponent } from './components/protected/dashboard/dashboard.component';
 import { isAuthenticatedGuard } from './shared/services/auth.service';
+import { DashHeroComponent } from './components/protected/dash-hero/dash-hero.component';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,11 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canMatch: [isAuthenticatedGuard],
+  },
+  {
+    path: 'dash-hero',
+    component: DashHeroComponent,
     canMatch: [isAuthenticatedGuard],
   },
   {
