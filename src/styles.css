@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --deep-red-100: #762124;
+  --deep-red-200: #5c1a1a;
+}
