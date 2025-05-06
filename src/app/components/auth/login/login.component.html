@@ -1,1 +1,32 @@
-<p>login works!</p>
+<h1>Είσοδος</h1>
+<form [formGroup]="form" class="control" (ngSubmit)="onSubmit()">
+  <div class="control">
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      placeholder="Εισάγετε το email σας"
+      autocomplete="email"
+    />
+  </div>
+  <div class="control">
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      placeholder="Εισάγετε τον κωδικό σας"
+      autocomplete="current-password"
+    />
+  </div>
+  <div class="link-container">
+    <!-- TODO to implement forget password component -->
+    <a [routerLink]="['../', 'forget-password']">Ξεχάσατε τον κωδικό σας;</a>
+  </div>
+  <button [disabled]="form.invalid">Είσοδος</button>
+</form>
+<div class="box-center">
+  <span>Δεν έχετε λογαριασμό;</span
+  ><a [routerLink]="['../', 'signup']">Εγγραφή</a>
+</div>

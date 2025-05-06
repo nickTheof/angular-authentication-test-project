@@ -1,0 +1,97 @@
+:host {
+  min-width: 400px;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  row-gap: 20px;
+  border: 1px solid var(--deep-red-100);
+  border-radius: 10px;
+  padding: 40px 20px;
+  box-shadow: 0 0 8px 2px black;
+}
+
+h1 {
+  align-self: center;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: 2rem;
+  font-stretch: expanded;
+}
+
+form {
+  padding: 20px 20px;
+  width: 100%;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  row-gap: 10px;
+  width: 100%;
+}
+
+.control input {
+  width: 100%;
+  border: 1px solid var(--deep-red-100);
+  border-radius: 10px;
+  height: 40px;
+  padding: 10px 10px;
+  font-size: 1.1rem;
+}
+
+.control input::placeholder {
+  font-size: 1rem;
+}
+
+label {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.link-container {
+  align-self: flex-end;
+}
+
+.link-container a,
+.box-center a {
+  text-decoration: none;
+  color: var(--deep-red-100);
+}
+
+.link-container a:hover,
+.link-container a:active,
+.box-center a:active,
+.box-center a:hover {
+  text-decoration: underline;
+  color: var(--deep-red-200);
+}
+
+button {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 10px;
+  border-radius: 10px;
+  background-color: var(--deep-red-100);
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+button:hover,
+button:active {
+  background-color: var(--deep-red-200);
+}
+
+.box-center {
+  align-self: center;
+  font-size: 1.2rem;
+}
+
+.box-center span {
+  padding-right: 5px;
+}
