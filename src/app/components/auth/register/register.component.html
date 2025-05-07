@@ -1,1 +1,54 @@
-<p>register works!</p>
+<h1>Είσοδος</h1>
+<form class="control" [formGroup]="form" (ngSubmit)="onRegister()">
+  <div class="control">
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      placeholder="Εισάγετε το email σας"
+      autocomplete="email"
+      formControlName="email"
+    />
+  </div>
+  <div class="control" formGroupName="passwords">
+    <div class="control">
+      <label for="password"
+        >Password
+        <span class="tooltip" tabindex="0">
+          ⓘ
+          <span class="tooltip-text">
+            Ο κωδικός πρέπει να περιλαμβάνει τουλάχιστον:
+            <ul>
+              <li>Οκτώ χαρακτήρες</li>
+              <li>Ένα κεφαλαίο γράμμα</li>
+              <li>Ένα πεζό γράμμα</li>
+              <li>Έναν αριθμό</li>
+              <li>Έναν ειδικό χαρακτήρα</li>
+            </ul>
+          </span>
+        </span></label
+      >
+      <input
+        id="password"
+        type="password"
+        placeholder="Εισάγετε τον κωδικό σας"
+        autocomplete="current-password"
+        formControlName="password"
+      />
+    </div>
+    <div class="control">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        id="confirmPassword"
+        type="password"
+        placeholder="Επιβεβαιώστε τον κωδικό σας"
+        autocomplete="current-password"
+        formControlName="confirmPassword"
+      />
+    </div>
+  </div>
+  <button [disabled]="form.invalid">Εγγραφή</button>
+</form>
+<div class="box-center">
+  <a [routerLink]="['../']">Επιστροφή στην αρχική σελίδα</a>
+</div>
