@@ -36,13 +36,12 @@ app.use(
 );
 
 app.use("/", limiter);
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/auth", authRouter);
 
 app.all("/{*splat}", (req, res, next) => {
   next(new AppError(`Can't find the ${req.originalUrl} on the server`, 404));
 });
-
-app.use("/api/v1/users", userRouter);
-app.use("/api/v1/auth", authRouter);
 
 // Add global error middleware
 app.use(errorController);

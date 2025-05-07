@@ -1,5 +1,6 @@
 require("winston-daily-rotate-file");
 require("winston-mongodb");
+require("dotenv").config();
 const winston = require("winston");
 const { format, transports } = require("winston");
 const { combine, timestamp, json, colorize, printf } = format;
@@ -28,7 +29,7 @@ const prodMongoDBTransport = new transports.MongoDB({
 
 const testingMongoDBTransport = new transports.MongoDB({
   level: "info",
-  db: process.env.MongoDB_URI_TESTING,
+  db: process.env.MongoDB_URI_TEST,
   collection: "testing_backend_logs",
 });
 

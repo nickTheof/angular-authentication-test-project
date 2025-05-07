@@ -5,7 +5,7 @@ const logger = require("./utils/logger");
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_DB_URI).then(
+mongoose.connect(process.env.MONGODB_URI).then(
   () => {
     logger.info("Mongo DB connection established");
     app.listen(PORT, () => {
