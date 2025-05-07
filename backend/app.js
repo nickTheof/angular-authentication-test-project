@@ -5,6 +5,8 @@ const hpp = require("hpp");
 const errorController = require("./middlewares/error.middleware");
 const limiter = require("./middlewares/limiter.middleware");
 const AppError = require("./utils/AppError");
+const userRouter = require("./routes/user.routes");
+const authRouter = require("./routes/auth.routes");
 
 const app = express();
 
@@ -38,6 +40,9 @@ app.use("/", limiter);
 app.all("/{*splat}", (req, res, next) => {
   next(new AppError(`Can't find the ${req.originalUrl} on the server`, 404));
 });
+
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/auth", authRouter);
 
 // Add global error middleware
 app.use(errorController);
