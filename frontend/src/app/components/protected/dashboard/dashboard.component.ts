@@ -11,8 +11,4 @@ import { RouterLink } from '@angular/router';
 export class DashboardComponent {
   private authService = inject(AuthService);
   user = this.authService.user;
-
-  logout() {
-    this.authService.logout();
-  }
 }

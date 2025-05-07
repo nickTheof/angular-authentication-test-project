@@ -1,4 +1,4 @@
-<p>dashboard works!</p>
-<p>{{ user()?.firstname }} {{ user()?.lastname }}</p>
-<button (click)="logout()">Logout</button>
+<div>
+  <h1>Welcome back, {{ user()?.firstname }} {{ user()?.lastname }}!!!</h1>
+</div>
 <a [routerLink]="['../', 'dash-hero']">Next page</a>
