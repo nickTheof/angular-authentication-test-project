@@ -1,7 +1,7 @@
 header {
-  height: 80px;
+  height: 120px;
   background-color: var(--deep-red-100);
-  padding: 20px 20px;
+  padding: 10px;
   border-bottom: 8px solid var(--deep-red-200);
 }
 
@@ -13,7 +13,7 @@ header {
 }
 
 header img {
-  height: 60px;
+  height: 50px;
   width: auto;
 }
 
@@ -22,4 +22,29 @@ header img {
   font-weight: 300;
   font-size: 1.4rem;
   color: white;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.header-actions span {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.header-actions button {
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+}
+
+.header-actions button:hover {
+  background-color: antiquewhite;
+  color: var(--deep-red-200);
 }

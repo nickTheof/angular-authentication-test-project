@@ -3,6 +3,10 @@
     <img src="logo_opa.png" alt="Economic University of Athens Logo" />
     <div class="title-text">Coding Factory - Education Reinvented</div>
   </div>
-  <!-- TODO Logged in USERS-->
-  <!-- <div></div> -->
+  @if (currentUser()) {
+  <div class="header-actions">
+    <span>{{ currentUser()?.email }}</span>
+    <button (click)="logoutUser()">Έξοδος</button>
+  </div>
+  }
 </header>
