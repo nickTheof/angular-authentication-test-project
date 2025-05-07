@@ -38,6 +38,12 @@ export class RegisterComponent {
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
+    firstname: new FormControl('', {
+      validators: [Validators.required],
+    }),
+    lastname: new FormControl('', {
+      validators: [Validators.required],
+    }),
     passwords: new FormGroup(
       {
         password: new FormControl('', {
@@ -61,6 +67,8 @@ export class RegisterComponent {
   onRegister() {
     const newUserDTO: RegisterUserDTO = {
       email: this.form.value.email || '',
+      firstname: this.form.value.firstname || '',
+      lastname: this.form.value.lastname || '',
       password: this.form.value.passwords?.password || '',
       confirmPassword: this.form.value.passwords?.confirmPassword || '',
     };

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { RegisterUserDTO } from '../interfaces/register-user-dto';
-import { CurrentUser } from '../interfaces/currentUser';
+import { User } from '../interfaces/currentUser';
 import { catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class RegisterService {
 
   registerUser(createUserDTO: RegisterUserDTO) {
     return this.client
-      .post<{ status: string; data: CurrentUser }>(
+      .post<{ status: string; data: User }>(
         'http://localhost:3000/api/v1/auth/register',
         createUserDTO
       )

@@ -3,7 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, of, tap, throwError } from 'rxjs';
 import { LoginDTO } from '../interfaces/dto/loginDTO';
-import { CurrentUser, GetCurrentUserResponse } from '../interfaces/currentUser';
+import { User, CurrentUserResponse } from '../interfaces/currentUser';
 import { LoginResponse } from '../interfaces/loginResponse';
 
 @Injectable({ providedIn: 'root' })
@@ -12,7 +12,7 @@ export class AuthService {
   private router = inject(Router);
 
   private _token = signal<string | null>(localStorage.getItem('token'));
-  private _user = signal<CurrentUser | null>(null);
+  private _user = signal<User | null>(null);
   private _lastFetched = signal<number | null>(null);
 
   token = this._token.asReadonly();
@@ -47,7 +47,7 @@ export class AuthService {
 
   getCurrentUser() {
     return this.client
-      .get<GetCurrentUserResponse>('http://localhost:3000/api/v1/users/me', {
+      .get<CurrentUserResponse>('http://localhost:3000/api/v1/users/me', {
         headers: {
           Authorization: `Bearer ${this._token()}`,
         },

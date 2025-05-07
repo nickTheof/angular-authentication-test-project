@@ -1,20 +1,16 @@
-export interface CurrentUser {
-  authProvider: 'local' | 'google';
-  avatar: string;
-  createdAt: string;
+export interface User {
   email: string;
   firstname: string;
-  isActive: boolean;
   lastname: string;
-  phone: { type: string; number: string }[];
+  isActive: boolean;
   roles: 'ADMIN' | 'EDITOR' | 'READER'[];
-  updatedAt: string;
-  __v: number;
   _id: string;
-  products: { product: string; cost: number; quantity: number; _id: string }[];
+  __v: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface GetCurrentUserResponse {
+export interface CurrentUserResponse {
   status: string;
-  data: CurrentUser;
+  data: User;
 }
