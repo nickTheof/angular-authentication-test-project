@@ -10,7 +10,6 @@ import { LoginResponse } from '../interfaces/loginResponse';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private client = inject(HttpClient);
-  private errorService = inject(ErrorService);
   private router = inject(Router);
 
   private _token = signal<string | null>(localStorage.getItem('token'));
@@ -28,9 +27,8 @@ export class AuthService {
           localStorage.setItem('token', resp.data);
           this._token.set(resp.data);
         }),
-        catchError(() => {
-          this.errorService.showError('Failed to login.');
-          return throwError(() => new Error('Failed to login'));
+        catchError((err) => {
+          return throwError(() => new Error(err.error.message));
         })
       );
   }
