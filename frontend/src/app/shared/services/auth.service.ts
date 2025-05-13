@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, of, tap, throwError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { LoginDTO } from '../interfaces/dto/loginDTO';
-import { User, CurrentUserResponse } from '../interfaces/currentUser';
+import { UserLoggedIn } from '../interfaces/currentUser';
 import { LoginResponse } from '../interfaces/loginResponse';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -12,11 +13,24 @@ export class AuthService {
   private router = inject(Router);
 
   private _token = signal<string | null>(localStorage.getItem('token'));
-  private _user = signal<User | null>(null);
-  private _lastFetched = signal<number | null>(null);
 
-  token = this._token.asReadonly();
-  user = this._user.asReadonly();
+  readonly user = computed(() => {
+    const token = this._token();
+    if (token) {
+      return jwtDecode<UserLoggedIn>(token);
+    }
+    return null;
+  });
+
+  readonly tokenExpired = computed(() => {
+    const token = this._token();
+    if (token) {
+      return this.isTokenExpired(token);
+    }
+    return true;
+  });
+
+  readonly token = this._token.asReadonly();
 
   login(loginData: LoginDTO) {
     return this.client
@@ -33,34 +47,19 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this._token.set(null);
-    this._user.set(null);
+    this.clearCredentials();
     this.router.navigate(['/login'], {
       replaceUrl: true,
     });
   }
 
-  getToken(): string | null {
-    return this._token();
+  isTokenExpired(token: string): boolean {
+    const decoded = jwtDecode<{ exp: number }>(token);
+    return decoded.exp * 1000 < Date.now();
   }
 
-  getCurrentUser() {
-    return this.client
-      .get<CurrentUserResponse>('http://localhost:3000/api/v1/users/me', {
-        headers: {
-          Authorization: `Bearer ${this._token()}`,
-        },
-      })
-      .pipe(
-        tap((resp) => {
-          this._user.set(resp.data);
-          this._lastFetched.set(Date.now());
-        })
-      );
-  }
-
-  getLastFetched(): number | null {
-    return this._lastFetched();
+  clearCredentials() {
+    localStorage.removeItem('token');
+    this._token.set(null);
   }
 }

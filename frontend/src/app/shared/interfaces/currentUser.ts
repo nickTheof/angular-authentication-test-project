@@ -10,7 +10,9 @@ export interface User {
   updatedAt: string;
 }
 
-export interface CurrentUserResponse {
-  status: string;
-  data: User;
+export interface UserLoggedIn {
+  _id: string;
+  email: string;
+  roles: string[];
+  exp: number;
 }

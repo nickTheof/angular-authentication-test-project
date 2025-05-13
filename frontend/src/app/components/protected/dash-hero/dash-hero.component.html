@@ -1,6 +1,4 @@
 <div>
-  <h1>
-    Welcome to the next page, {{ user()?.firstname }} {{ user()?.lastname }}!!!
-  </h1>
+  <h1>Welcome to the next page, {{ user()?.email }}!!!</h1>
 </div>
 <a [routerLink]="['../', 'dashboard']">Go to dashboard</a>
